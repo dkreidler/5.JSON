@@ -23,6 +23,31 @@
     <script>
         var header = document.querySelector('header');
         var section = document.querySelector('section');
+        // setup for json request
+        // store the URL in a variable
+        var requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+
+        // create a variable for the XHR, which has methods(?)
+        var request = new XMLHttpRequest();
+
+        // HTTP method is GET, as we are just retrieving data, from 
+        // the previously stored URL
+        request.open('GET', requestURL);
+
+        // telling XHR to be expecting a JSON response
+        request.responseType = 'json';
+
+        // then we send the request with the send() method
+        request.send();
+
+        // wait for the response from the server, then dealing with it
+        // store response object in a new variable called superHeroes
+        // pass that object to two function calls that will fill the header and hero info
+        request.onload = function() {
+            var superHeroes = request.response;
+            populateHeader(superHeroes);
+            showHeroes(superHeroes);
+        }
     </script>
 </body>
 
