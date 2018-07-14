@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Fucking Around with Shower Thoughts</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+
+    </header>
+
+    <section>
+
+    </section>
+
+    <script>
+        var header = document.querySelector('header');
+        var section = document.querySelector('section');
+        // setup for json request
+        // store the json source URL in a variable
+        var requestURL = 'https://www.reddit.com/r/Animalsbeingderps.json';
+
+        // create a variable for the XHR, which has methods(?)
+        var request = new XMLHttpRequest();
+
+        // HTTP method is GET as we are just retrieving data from 
+        // the previously stored URL
+        request.open('GET', requestURL);
+
+        // telling XHR to be expecting a JSON response
+        request.responseType = 'json';
+
+        // then we send the request with the send() method
+        request.send();
+
+        // wait for the response from the server, then dealing with it
+        // store response object in a new variable called superHeroes
+        // pass that object to two function calls that will fill the header and hero info
+        // Wrapping function in the onload handler guarantees that it won't run until the JSON request *has* completed
+        request.onload = function() {
+                var showerThoughts = request.response;
+                // populateHeader(showerThoughts);
+                showThoughts(showerThoughts);
+            }
+            // call the parameter jsonObj to make it clear we're parsing a JSON object
+            /* function populateHeader(jsonObj) {
+            var myH1 = document.createElement('h1');
+            myH1.textContent = jsonObj['squadName'];
+            header.appendChild(myH1);
+
+            var myPara = document.createElement('p');
+            myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
+            header.appendChild(myPara);
+        }
+*/
+        function showThoughts(jsonObj) {
+            var thoughts = jsonObj["children"];
+            for (let i = 0; i < thoughts.length; i++) {
+                var title = thoughts[i].data[i].title;
+                console.log("Some data = " + title);
+
+            }
+        }
+        /*    for (let i = 0; i < data[a].length; i++) {
+                var myArticle = document.createElement('article');
+                // var myH2 = document.createElement('h2');
+                // var myPara1 = document.createElement('p');
+                // var myPara2 = document.createElement('p');
+                var myPara3 = document.createElement('p');
+                var myList = document.createElement('ul');
+
+                // myH2.textContent = heroes[i].name;
+                // myPara1.textContent = 'Secret Identity: ' + heroes[i].secretIdentity;
+                // myPara2.textContent = 'Age: ' + heroes[i].age;
+                myPara3.textContent = 'ShowerThoughts: ';
+
+                var sTChildren = data[i].children;
+                for (let j = 0; j < sTChildren.length; j++) {
+                    var listItem = document.createElement('li');
+                    listItem.textContent = sTChildren[j];
+                    myList.appendChild(listItem);
+
+                }
+                // myArticle.appendChild(myH2);
+                // myArticle.appendChild(myPara1);
+                // myArticle.appendChild(myPara2);
+                myArticle.appendChild(myPara3);
+                myArticle.appendChild(myList);
+
+                section.appendChild(myArticle);
+
+
+
+            }
+        } */
+    </script>
+</body>
+
+</html>
